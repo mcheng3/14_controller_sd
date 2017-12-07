@@ -21,7 +21,9 @@ int main( int argc, char *argv[]){
 				int val;
 				sscanf(argv[2], "%d", &val);
 				//printf("%d\n", val);
-				semctl(semdes, 0, SETVAL, val);
+				union semun semopts;
+				semopts.val = val;
+				semctl(semdes, 0, SETVAL, semopts);
 				printf("semaphore created: %d\nvalue set: %d\n", semdes, val);
 			}
 			else{
